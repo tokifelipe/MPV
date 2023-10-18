@@ -4,6 +4,23 @@ import { Button } from '@mui/material'
 import NavBar from '../components/nav_bar'
 import LogoUSM from '../assets/usm.png'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const InternalPage = () => {
   return (
     <div className='page'>

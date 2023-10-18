@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 
-import AppRouter from './components/app_router'
+import AppRouter from './components/App'
 
 import './stylesheets/index.scss'
 
