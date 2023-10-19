@@ -10,6 +10,7 @@ import InternalPage from '../pages/InternalPage';
 import MenuPage from '../pages/MenuPage';
 import EditPage from '../pages/EditPage';
 import PlanPage from '../pages/PlanPage';
+import ViewPage from '../pages/ViewPage';
 
 const App = () => {
     return (
@@ -20,6 +21,7 @@ const App = () => {
 				<Route path='/home' element={<HomePage />} />
 				<Route path='/internal' element={<InternalPage />} />
 				<Route path='/edit' element={<EditPage />} />
+				<Route path='/minute/:value' element={<ViewPage />} />
 				
 			</Routes>
 			
