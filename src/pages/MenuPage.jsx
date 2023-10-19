@@ -44,8 +44,8 @@ const defaultTheme = createTheme();
 const MenuPage = () => {
     const navigate = useNavigate();
 
-    const verHandler = () => {
-        navigate('/home');
+    const verHandler = (index) => {
+        navigate('/minute/'+index);
     }
 
     const editarHandler = () => {
@@ -63,7 +63,7 @@ const MenuPage = () => {
             <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-                {cards.map((card) => (
+                {cards.map((card, index) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                     <Card
                     sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -80,7 +80,7 @@ const MenuPage = () => {
                     <CardActions>
                         <Button 
                             size="small"
-                            onClick={verHandler}
+                            onClick={() => verHandler(index+1)}
                         >Ver</Button>
                         <Button 
                             size="small"
