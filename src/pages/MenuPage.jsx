@@ -53,45 +53,13 @@ const MenuPage = () => {
     }
 
     return (
+    <div className='page'>
         <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-        <AppBar position="relative">
-            <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-                Planificador
-            </Typography>
-            </Toolbar>
-        </AppBar>
+    <h1 className='page__title'>Reuniones Anteriores</h1>
+      <NavBar />
         <main>
             {/* Hero unit */}
-            <Box
-            sx={{
-                bgcolor: 'background.paper',
-                pt: 8,
-                pb: 6,
-            }}
-            >
-            <Container maxWidth="sm">
-            <Stack
-                sx={{ pt: 4 }}
-                direction="row"
-                spacing={2}
-                justifyContent="center"
-                >
-                <Button variant="contained">Planificar nueva Reunión</Button>
-                </Stack>
-                <Typography
-                component="h1"
-                variant="h2"
-                align="center"
-                color="text.primary"
-                gutterBottom
-                >
-                Reuniones anteriores:
-                </Typography>
-        
-            </Container>
-            </Box>
             <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
@@ -128,7 +96,7 @@ const MenuPage = () => {
         {/* Footer */}
         <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
             <Typography variant="h6" align="center" gutterBottom>
-            Footer
+            DIU
             </Typography>
             <Typography
             variant="subtitle1"
@@ -142,6 +110,7 @@ const MenuPage = () => {
         </Box>
         {/* End footer */}
         </ThemeProvider>
+    </div>
     );
 }
 

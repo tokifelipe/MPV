@@ -9,15 +9,18 @@ import HomePage from '../pages/HomePage';
 import InternalPage from '../pages/InternalPage';
 import MenuPage from '../pages/MenuPage';
 import EditPage from '../pages/EditPage';
+import PlanPage from '../pages/PlanPage';
 
 const App = () => {
     return (
       	<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<MenuPage />} />
+				<Route path='/plan' element={<PlanPage />} />
 				<Route path='/home' element={<HomePage />} />
 				<Route path='/internal' element={<InternalPage />} />
 				<Route path='/edit' element={<EditPage />} />
+				
 			</Routes>
 			
 		</BrowserRouter>

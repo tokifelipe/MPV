@@ -5,14 +5,14 @@ import Box from '@mui/material/Box';
 import NavBar from '../components/NavBar'
 import LogoUSM from '../assets/usm.png'
 
-const InternalPage = () => {
+const PlanPage = () => {
   return (
     <div className='page'>
-      <h1 className='page__title'>Frontend Sample App</h1>
+      <h1 className='page__title'>Planificación de reuiones</h1>
       <NavBar />
-      <h2>Página Interna</h2>
+      <h2>Planifica tu próxima Reunión</h2>
       <img src={LogoUSM} height={100} alt='logo usm' /><br />
-      <Button variant='contained'>Material UI Button</Button>
+      <Button variant='contained'>Guardar Reunión</Button>
       <Box
             sx={{
                 bgcolor: 'background.paper',
@@ -20,10 +20,10 @@ const InternalPage = () => {
                 pb: 6,
             }}
       >
-        kajkak
+        Ingrese Tema reunion
       </Box>
     </div>
   )
 }
 
-export default InternalPage
+export default PlanPage
