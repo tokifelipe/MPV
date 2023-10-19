@@ -5,7 +5,7 @@ import SnackbarContent from '@mui/material/SnackbarContent';
 
 const action = (
   <Button color="secondary" size="small">
-    Borrar Tema
+    Borrar Archivo
   </Button>
 );
 
