@@ -48,8 +48,8 @@ const MenuPage = () => {
         navigate('/minute/'+index);
     }
 
-    const editarHandler = () => {
-        navigate('/edit');
+    const editarHandler = (index) => {
+        navigate('/edit/'+index);
     }
 
     return (
@@ -86,7 +86,7 @@ const MenuPage = () => {
                         <Button 
                             className='button'
                             size="small"
-                            onClick={editarHandler}
+                            onClick={() => editarHandler(index+1)}
                         >Editar</Button>
                     </CardActions>
                     </Card>
