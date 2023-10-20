@@ -1,5 +1,45 @@
+// Color palette
+$primary: #F09893;
+$secondary: #EBD6D7;
+$tertiary: #F9EBD9;
+$quaternary: #E9DD6A;
+$fifth: #439093;
+
 .page {
-  background: #f0f0f0;
+  background: $tertiary;
   padding: 20px;
   margin: 20px;
+}
+
+// Text styles
+h1, h2, h3, h4, h5, h6 {
+  color: $fifth;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+
+  &:hover {
+    color: $fifth;
+  }
+}
+
+// Component styles
+.button {
+  background-color: $primary;
+  color: $secondary;
+  border: none;
+  
+  &:hover {
+    background-color: $secondary;
+    color: $primary;
+  }
+}
+
+.card {
+  background-color: $secondary;
+  border: 1px solid $primary;
+  border-radius: 5px;
+  padding: 20px;
 }

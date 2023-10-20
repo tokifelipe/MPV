@@ -79,10 +79,12 @@ const MenuPage = () => {
                     </CardContent>
                     <CardActions>
                         <Button 
+                            className='button'
                             size="small"
                             onClick={() => verHandler(index+1)}
                         >Ver</Button>
                         <Button 
+                            className='button'
                             size="small"
                             onClick={editarHandler}
                         >Editar</Button>

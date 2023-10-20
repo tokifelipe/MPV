@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@mui/material'
 import NavBar from '../components/NavBar'
 import { useParams } from 'react-router-dom';
@@ -37,12 +37,26 @@ function Resumen({ resumenText }) {
 }
 
 function DocumentosAdjuntos({ documentos }) {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDownload = () => {
+    setIsLoading(true); // Activar el estado de carga
+    setTimeout(() => {
+      setIsLoading(false);
+      Download();
+    }, 700);
+  };
+
   return (
     <div>
       <h2>Documentos Adjuntos</h2>
       <ul className="document-container">
         {documentos.map((documento, index) => (
-          <li key={index} className="document-box">
+          <li key={index}
+            className="document-box"
+            onClick={isLoading ? null : handleDownload}
+            style={{ cursor: isLoading ? 'default' : 'pointer' }}
+          >
             <div className="icon">📄</div>
             {documento}
           </li>
@@ -51,5 +65,16 @@ function DocumentosAdjuntos({ documentos }) {
     </div>
   );
 }
+
+const Download = () => {
+  // Void blob
+  const blob = new Blob([''], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'archivo.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+};
 
 export default ViewPage
