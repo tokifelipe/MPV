@@ -1,8 +1,12 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
+import AppFooter from '../components/Footer'
+import { actasData } from './actasData';
 import {
     useNavigate
 } from 'react-router-dom';
+
+import { Container } from 'react-bootstrap';
 
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -16,7 +20,6 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { 
     createTheme, 
@@ -36,7 +39,10 @@ function Copyright() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// Función para recortar el texto
+const truncateText = (text) => {
+    return text.length > 52 ? text.slice(0, 52) + '...' : text;
+}
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -51,42 +57,42 @@ const MenuPage = () => {
     const editarHandler = (index) => {
         navigate('/edit/'+index);
     }
-
+    
     return (
     <div className='page'>
         <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
-    <h1 className='page__title'>Reuniones Anteriores</h1>
-      <NavBar />
-        <main>
-            {/* Hero unit */}
+        <NavBar />
+        <Container fluid="md" id="menu-container">
             <Container sx={{ py: 8 }} maxWidth="md">
-            {/* End hero unit */}
+            <h1 className='page__title'>Reuniones Anteriores</h1>
             <Grid container spacing={4}>
-                {cards.map((card, index) => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
+                {actasData.map((acta) => (
+                <Grid item key={acta.id} xs={12} sm={6} md={4}>
                     <Card
                     sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                     >
-                
                     <CardContent sx={{ flexGrow: 1 }}>
                         <Typography gutterBottom variant="h5" component="h2">
-                        Reunion sobre el estallido
+                        {acta.reunionTitle}
                         </Typography>
                         <Typography>
-                        Aqui va toda la info
+                        {acta.actaDate}
+                        </Typography>
+                        <Typography>
+                        {truncateText(acta.resumenText)}
                         </Typography>
                     </CardContent>
                     <CardActions>
                         <Button 
-                            className='button'
+                            className='button acta-button'
                             size="small"
-                            onClick={() => verHandler(index+1)}
+                            onClick={() => verHandler(acta.id)}
                         >Ver</Button>
                         <Button 
-                            className='button'
+                            className='button acta-button'
                             size="small"
-                            onClick={() => editarHandler(index+1)}
+                            onClick={() => editarHandler(acta.id)}
                         >Editar</Button>
                     </CardActions>
                     </Card>
@@ -94,7 +100,7 @@ const MenuPage = () => {
                 ))}
             </Grid>
             </Container>
-        </main>
+        </Container>
         {/* Footer */}
         <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
             <Typography variant="h6" align="center" gutterBottom>

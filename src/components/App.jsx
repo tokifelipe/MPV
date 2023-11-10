@@ -5,6 +5,8 @@ import {
 	BrowserRouter
 } from 'react-router-dom';
 
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import HomePage from '../pages/HomePage';
 import InternalPage from '../pages/InternalPage';
 import MenuPage from '../pages/MenuPage';
@@ -17,6 +19,7 @@ const App = () => {
       	<BrowserRouter>
 			<Routes>
 				<Route path='/' element={<MenuPage />} />
+				<Route path='/dashboard' element={<MenuPage />} />
 				<Route path='/plan' element={<PlanPage />} />
 				<Route path='/home' element={<HomePage />} />
 				<Route path='/internal' element={<InternalPage />} />

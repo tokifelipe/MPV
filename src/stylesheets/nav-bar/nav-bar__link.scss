@@ -6,5 +6,8 @@
   &--active {
     background: $primary;
     color: white;
+    border-radius: 3px;
+    width: fit-content;
+    height: auto;
   }
 }
