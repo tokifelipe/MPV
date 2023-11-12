@@ -1,31 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import { Button } from '@mui/material'
 import NavBar from '../components/NavBar'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { actasData } from './actasData';
+import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 const ViewPage = () => {
+  const navigate = useNavigate();
   const { value } = useParams();
 
   let actaData = actasData.find((actaData) => actaData.id === value);
 
+  // Si no se encuentra actaData, redirige al usuario
   if (!actaData) {
-    actaData = actasData.find((actaData) => actaData.id === '0');
+    useEffect(() => {
+      navigate('/dashboard');
+    }, []);
+    return null;
   }
 
   return (
-    <div className='page'>
-      <h1 className='page__title'>Reuniones Anteriores</h1>
-      <NavBar />
-      <div>
-        <h3>{actaData.actaDate}</h3>
-        <h1>{actaData.reunionTitle}</h1>
-        <Resumen resumenText={actaData.resumenText} />
-        <DocumentosAdjuntos documentos={actaData.documentos} />
-      </div>
-    </div>
-  )
-}
+      <><NavBar /><Container className='mt-4'>
+      <Row className='justify-content-md-center'>
+        <Col md={8}>
+          <Card className='mb-4'>
+            <Card.Header as="h1">Reunión</Card.Header>
+            <Card.Body>
+              <Card.Title>{actaData.reunionTitle}</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">{actaData.actaDate}</Card.Subtitle>
+              <Resumen resumenText={actaData.resumenText} />
+            </Card.Body>
+          </Card>
+          <DocumentosAdjuntos documentos={actaData.documentos} />
+        </Col>
+      </Row>
+    </Container></>
+  );
+};
 
 function Resumen({ resumenText }) {
   return (
@@ -47,23 +57,33 @@ function DocumentosAdjuntos({ documentos }) {
     }, 700);
   };
 
+  // Función para recortar el nombre del archivo
+  const truncateText = (text) => {
+    return text.length > 22 ? text.slice(0, 22) + '...' : text;
+  }
+
   return (
-    <div>
-      <h2>Documentos Adjuntos</h2>
-      <ul className="document-container">
-        {documentos.map((documento, index) => (
-          <li key={index}
-            className="document-box"
-            onClick={isLoading ? null : handleDownload}
-            style={{ cursor: isLoading ? 'default' : 'pointer' }}
-          >
-            <div className="icon">📄</div>
-            {documento}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+    <Card className='mb-4'>
+      <Card.Header as="h1">Documentos Adjuntos</Card.Header>
+      <Card.Body>
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {documentos.map((documento, index) => (
+            <Col key={index}>
+              <ListGroup.Item
+                action
+                onClick={!isLoading ? handleDownload : undefined}
+                className="document-box d-flex align-items-center justify-content-start"
+                style={{ cursor: isLoading ? 'default' : 'pointer' }}
+              >
+                <div className="icon me-2">📄</div>
+                {truncateText(documento)}
+              </ListGroup.Item>
+            </Col>
+          ))}
+        </Row>
+      </Card.Body>
+    </Card>
+  ); 
 }
 
 const Download = () => {

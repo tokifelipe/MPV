@@ -6,9 +6,7 @@ $quaternary: #E9DD6A;
 $fifth: #439093;
 
 .page {
-  background: $tertiary;
-  padding: 20px;
-  margin: 20px;
+  background: white;
 }
 
 // Text styles
@@ -37,9 +35,17 @@ a {
   }
 }
 
-.card {
-  background-color: $secondary;
-  border: 1px solid $primary;
-  border-radius: 5px;
-  padding: 20px;
+.card-header {
+  background-color: $tertiary;
+}
+
+.acta-button {
+  color: $primary;
+}
+
+#menu-container {
+  background-color: $tertiary;
+  padding: 2em;
+  border-radius: 2px;
+  margin-top: 2em;
 }

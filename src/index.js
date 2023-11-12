@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
+import bootstrap from 'bootstrap'
 
 import AppRouter from './components/App'
 

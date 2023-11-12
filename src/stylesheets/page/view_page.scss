@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   background-color: #fff;
   border-radius: 5px;
-  width: fit-content;
+  width: 100%;
   min-height: fit-content;
   padding-inline-start: 0;
 }
@@ -20,4 +20,12 @@
 .icon {
   font-size: 32px;
   margin-bottom: 10px;
+}
+
+.card-header {
+  color: $fifth;
+}
+
+.doc-title {
+  overflow-x: hidden;
 }
