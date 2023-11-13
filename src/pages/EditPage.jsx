@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import { actasData } from './actasData';
 
-import { 
-    TextField,
-    Button,
-    Grid, 
-    Container,
-    Box,
-    Typography
-} from '@mui/material';
-import { Row, Col, Card } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
+import { Row, Col, Card, Form, Button, Container, Modal } from 'react-bootstrap';
 
 const EditPage = () => {
     const { value } = useParams();
@@ -96,105 +87,109 @@ const EditPage = () => {
         handleOpenExit();
     }
 
+    const fileInputRef = useRef(null); // Referencia para el input de archivo
+
+    const onFileButtonClick = () => {
+        fileInputRef.current.click(); // Desencadena el clic en el input de archivo
+    };
+
     return (
         <div className='page'>
             <NavBar />
-            <Container sx={{ mt : 4}}>
-                <Row className='justify-content-md-center' >
-                    <Col md={8} >
-                        <Box 
-                            component='form' 
-                            onSubmit={handleSubmit}
-                            noValidate
-                            autoComplete="on"
-                        >
-                            <Card className='mb-4' sx={{ mt: 3 }} >
-                                <Card.Header className='page__title'>Editor de la Reunión</Card.Header>
+            <Container className="mt-4">
+                <Row className='justify-content-md-center'>
+                    <Col md={8}>
+                        <Form onSubmit={handleSubmit}>
+                            <Card className='mb-4 mt-3'>
+                                <Card.Header>Editor de la Reunión</Card.Header>
                                 <Card.Body>
-                                    <Grid container spacing={4} sx={{ py: 2 }}>
-                                        <Grid item xs={12}>
-                                            <TextField 
-                                                id="outlined-required" 
-                                                label="Fecha del Acta"
-                                                name='actaDate'
+                                    <Form.Group as={Row} className="mb-3">
+                                        <Form.Label column sm="2">
+                                            Fecha del Acta
+                                        </Form.Label>
+                                        <Col sm="10">
+                                            <Form.Control 
+                                                type="text" 
+                                                placeholder="Fecha del Acta" 
                                                 value={actaDate}
-                                                variant="filled"
-                                                pattern="[1-9]|[12][0-9]|3[01]/[1-9]|1[012]/\d{4,4}"
                                                 onChange={(e) => setActaDate(e.target.value)}
                                             />
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container spacing={4} sx={{ py: 2 }}>
-                                        <Grid item xs={12}>
-                                            <TextField 
-                                                fullWidth 
-                                                multiline
-                                                id="outlined-required"
-                                                label="Título de Reunión" 
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} className="mb-3">
+                                        <Form.Label column sm="2">
+                                            Título de Reunión
+                                        </Form.Label>
+                                        <Col sm="10">
+                                            <Form.Control 
+                                                type="text" 
+                                                as="textarea" 
+                                                rows={3}
+                                                placeholder="Título de Reunión" 
                                                 value={reunionTitle}
-                                                variant="filled"
                                                 onChange={(e) => setReunionTitle(e.target.value)} 
                                             />
-                                        </Grid>
-                                    </Grid>
-                                    <Grid container spacing={4} sx={{ py: 2 }}>
-                                        <Grid item xs={12}>
-                                            <TextField 
-                                                fullWidth 
-                                                multiline 
-                                                id="outlined-required" 
-                                                label="Resumen"
+                                        </Col>
+                                    </Form.Group>
+                                    <Form.Group as={Row} className="mb-3">
+                                        <Form.Label column sm="2">
+                                            Resumen
+                                        </Form.Label>
+                                        <Col sm="10">
+                                            <Form.Control 
+                                                type="text" 
+                                                as="textarea" 
+                                                rows={3}
+                                                placeholder="Resumen" 
                                                 value={resumenText}
-                                                variant="filled" 
                                                 onChange={(e) => setResumenText(e.target.value)}
                                             />
-                                        </Grid>
-                                    </Grid>
+                                        </Col>
+                                    </Form.Group>
                                 </Card.Body>
                             </Card>
-                            <Card sx={{ mt: 3 }} >
-                                <Card.Header className='page__title'>Editor de la Documentación</Card.Header>
+                            <Card className='mb-4 mt-3'>
+                                <Card.Header>Editor de la Documentación</Card.Header>
                                 <Card.Body>
-                                    <Grid container spacing={4} sx={{ py: 2 }}>
-                                        {documentos.map((doc) => (
-                                            <Grid item xs={3} onClick={() => handleOpenFile(doc)}>
+                                    <Form.Group as={Row}>
+                                        {documentos.map((doc, index) => (
+                                            <Col xs={3} key={index} onClick={() => handleOpenFile(doc)}>
                                                 <div className="icon me-2">📄</div>
                                                 {truncateText(doc)}
-                                            </Grid>
+                                            </Col>
                                         ))}
-                                    </Grid>
-                                    <Grid container spacing={4} sx={{ py: 2 }}>
-                                        <Grid item xs={12}>
-                                            <Button
-                                                variant="outlined"
-                                                component="label"
-                                            >
+                                    </Form.Group>
+                                    <Form.Group as={Row} className="mt-3">
+                                        <Col>
+                                            <Button variant="outline-primary" onClick={onFileButtonClick}>
                                                 Agregar archivo
-                                                <input
-                                                    type="file"
-                                                    id="uploads"
-                                                    onChange={handleFileUpload}
-                                                    hidden
-                                                    multiple
-                                                />
                                             </Button>
-                                        </Grid>
-                                    </Grid>     
-                                </Card.Body>  
+                                            <Form.Control
+                                                type="file"
+                                                id="uploads"
+                                                ref={fileInputRef}
+                                                onChange={handleFileUpload}
+                                                hidden
+                                                multiple
+                                            />
+                                        </Col>
+                                    </Form.Group>
+                                </Card.Body>
                             </Card>
-                            <Container sx={{ mt: 3 }}>
-                                <Grid container spacing={4} sx={{ py: 2 }}>
-                                    <Grid item xs={12}>
-                                        <Button type="submit" variant='contained' >
+                            <Container className="mt-3">
+                                <Row>
+                                    <Col>
+                                        <Button type="submit" variant="primary">
                                             Realizar Cambios
                                         </Button>
-                                    </Grid>
-                                </Grid>
+                                    </Col>
+                                </Row>
                             </Container>
-                        </Box>
+                        </Form>
                     </Col>
                 </Row>
             </Container>
+            <br />
 
             <Modal
                 show={openFile}
