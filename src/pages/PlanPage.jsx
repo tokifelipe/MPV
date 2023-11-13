@@ -97,6 +97,7 @@ const PlanPage = () => {
   return (
     <div className='page'>
       <NavBar />
+      <br />
       <Container>
         <Row className='justify-content-md-center'>
           <Col md={8}>
