@@ -32,13 +32,15 @@ export default function FormPropsTextFields() {
           InputLabelProps={{ shrink: true }}  
           defaultValue="12-07-2000"
         />
-         <TextField
+
+        {/*          
+        <TextField
           id="outlined-required"
           label="Hora reunión"
           type="time"
           InputLabelProps={{ shrink: true }} 
           defaultValue=""
-        />
+        /> */}
         
       </div>
      
