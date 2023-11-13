@@ -10,6 +10,7 @@ const PlanPage = () => {
 
   const [id, setId] = useState("");
   const [actaDate, setActaDate] = useState("");
+  const [actaHour, setActaHour] = useState("");
   const [reunionTitle, setReunionTitle] = useState("");
   const [resumenText, setResumenText] = useState("");
   const [documentos, setDocumentos] = useState([]);
@@ -54,12 +55,13 @@ const PlanPage = () => {
     const updatedReunion = {
       id: id_num.toString(),
       actaDate,
+      actaHour,
       reunionTitle,
       resumenText,
       documentos,
     }
 
-    const flag = (actaDate !== "") && (reunionTitle !== "") && (resumenText !== "");
+    const flag = (actaDate !== "") && (actaHour !== "") && (reunionTitle !== "") && (resumenText !== "");
 
     if(flag) {
       actasData.push(updatedReunion);
@@ -120,10 +122,19 @@ const PlanPage = () => {
                   <Form.Group className="mb-3">
                     <Form.Label>Fecha Reunión</Form.Label>
                     <Form.Control 
-                      type="text" 
+                      type="date" 
                       placeholder="Fecha Reunión" 
                       value={actaDate}
                       onChange={(e) => setActaDate(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3">
+                    <Form.Label>Hora Reunión</Form.Label>
+                    <Form.Control 
+                      type="time" 
+                      placeholder="Hora Reunión" 
+                      value={actaHour}
+                      onChange={(e) => setActaHour(e.target.value)}
                     />
                   </Form.Group>
                 </Card.Body>

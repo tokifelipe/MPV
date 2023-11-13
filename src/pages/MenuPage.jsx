@@ -81,6 +81,9 @@ const MenuPage = () => {
                         {acta.actaDate}
                         </Typography>
                         <Typography>
+                        {acta.actaHour}
+                        </Typography>
+                        <Typography>
                         {truncateText(acta.resumenText)}
                         </Typography>
                     </CardContent>

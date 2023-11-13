@@ -27,6 +27,7 @@ const ViewPage = () => {
             <Card.Body>
               <Card.Title>{actaData.reunionTitle}</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">{actaData.actaDate}</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">{actaData.actaHour}</Card.Subtitle>
               <Resumen resumenText={actaData.resumenText} />
             </Card.Body>
           </Card>
