@@ -34,7 +34,7 @@ const NavBar = () => {
                           className={({ isActive }) => `nav-bar__link ${isActive ? 'nav-bar__link--active' : ''}`}
                           to='/plan'
                         >
-                          Reuniones
+                           Planificar Reunión
                         </NavLink>
                     </Nav>
                 </Navbar.Collapse>
