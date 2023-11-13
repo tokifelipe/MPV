@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid } from '@mui/material'
+import { Grid } from '@mui/material'
 import Container from '@mui/material/Container';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import FormPropsTextFields from '../components/FormPropsTextFields'
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { Row, Col, Card } from 'react-bootstrap';
+import { Row, Col, Card, Form, Button, InputGroup, FormControl } from 'react-bootstrap';
 
 
 const divStyle = {
@@ -124,15 +124,14 @@ const truncateText = (text) => {
           <Card className='mb-4'>
             <Card.Header as="h1">Temas de la reunión</Card.Header>
             <Card.Body>
-
-            <ListGroup  as="ol" numbered>
-            <ListGroup.Item><input size="100" /></ListGroup.Item>
-            <ListGroup.Item><input size="100" /></ListGroup.Item>
-            <ListGroup.Item><input size="100"/></ListGroup.Item>
-            <ListGroup.Item><input size="100"/></ListGroup.Item>
-            <ListGroup.Item><input size="100"/></ListGroup.Item>
-            </ListGroup>
-
+              {[...Array(5)].map((_, index) => (
+                <InputGroup className="mb-3" key={index}>
+                  <InputGroup.Text>{index + 1}.</InputGroup.Text>
+                  <FormControl />
+                </InputGroup>
+              ))}
+              <Form.Label>Documentación subida para esta reunión</Form.Label>
+              <Button variant="primary">Agregar Archivo</Button>
             <Container sx={{ mt: 3 }} >
                         <h1 className='page__title'>Documentación subida para esta reunión</h1>
                         <Card.Subtitle className="mb-2 text-muted">Seleccione los archivos asociados a esta reunión</Card.Subtitle>
