@@ -13,7 +13,6 @@ export default function FormPropsTextFields() {
       autoComplete="on"
     >
       <div>
-      <h2>Ingresar datos de la reunión</h2>
       <TextField
           required
           id="outlined-required"
