@@ -66,6 +66,7 @@ const MenuPage = () => {
         <Container fluid="md" id="menu-container">
             <Container sx={{ py: 8 }} maxWidth="md">
             <h1 className='page__title'>Reuniones Anteriores</h1>
+            <br />
             <Grid container spacing={4}>
                 {actasData.map((acta) => (
                 <Grid item key={acta.id} xs={12} sm={6} md={4}>

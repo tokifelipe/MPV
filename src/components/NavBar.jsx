@@ -28,7 +28,7 @@ const NavBar = () => {
                           className={({ isActive }) => `nav-bar__link ${isActive ? 'nav-bar__link--active' : ''}`}
                           to='/dashboard'
                         >
-                          Home
+                          Reuniones
                         </NavLink>
                         <NavLink
                           className={({ isActive }) => `nav-bar__link ${isActive ? 'nav-bar__link--active' : ''}`}

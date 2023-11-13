@@ -101,7 +101,7 @@ const EditPage = () => {
                     <Col md={8}>
                         <Form onSubmit={handleSubmit}>
                             <Card className='mb-4 mt-3'>
-                                <Card.Header>Editor de la Reunión</Card.Header>
+                                <Card.Header as="h1">Editor de la Reunión</Card.Header>
                                 <Card.Body>
                                     <Form.Group as={Row} className="mb-3">
                                         <Form.Label column sm="2">
@@ -149,7 +149,7 @@ const EditPage = () => {
                                 </Card.Body>
                             </Card>
                             <Card className='mb-4 mt-3'>
-                                <Card.Header>Editor de la Documentación</Card.Header>
+                                <Card.Header as="h1">Editor de la Documentación</Card.Header>
                                 <Card.Body>
                                     <Form.Group as={Row}>
                                         {documentos.map((doc, index) => (
