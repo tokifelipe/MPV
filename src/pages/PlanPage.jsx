@@ -13,8 +13,8 @@ const PlanPage = () => {
   const [reunionTitle, setReunionTitle] = useState("");
   const [resumenText, setResumenText] = useState("");
   const [documentos, setDocumentos] = useState([]);
+  const [temas, setTemas] = useState(['']);
   const [openExit, setOpenExit] = useState(false);
-  const [openFile, setOpenFile] = useState(false);
   const [warning, setWarning] = useState(false);
 
   const handleOpenExit = () => setOpenExit(true);
@@ -29,12 +29,6 @@ const PlanPage = () => {
 
     setOpenExit(false);
   };
-
-  const handleOpenFile = (filename) => {
-    // setRmvFile(filename); // Asegúrate de definir esta función y estado si es necesario
-    setOpenFile(true);
-  };
-  const handleCloseFile = () => setOpenFile(false);
 
   const backToMenu = () => {
     navigate("/");
@@ -55,8 +49,10 @@ const PlanPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    let id_num = actasData.length + 1;
+
     const updatedReunion = {
-      id,
+      id: id_num.toString(),
       actaDate,
       reunionTitle,
       resumenText,
@@ -72,9 +68,6 @@ const PlanPage = () => {
       setWarning(true);
     }
   }
-
-  // Estado para manejar los temas de la reunión
-  const [temas, setTemas] = useState(['']);
 
   // Función para manejar el cambio en los temas
   const handleTemasChange = (value, index) => {
@@ -99,12 +92,12 @@ const PlanPage = () => {
       <NavBar />
       <br />
       <Container>
-        <Row className='justify-content-md-center'>
-          <Col md={8}>
-            <Card className='mb-4'>
-              <Card.Header as="h5">Datos de la reunión</Card.Header>
-              <Card.Body>
-                <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          <Row className='justify-content-md-center'>
+            <Col md={8}>
+              <Card className='mb-4'>
+                <Card.Header as="h5">Datos de la reunión</Card.Header>
+                <Card.Body>
                   {warning && (<div className="text-danger">Ingrese texto en todos los campos requeridos</div>)}
                   <Form.Group className="mb-3">
                     <Form.Label>Título de la Reunión</Form.Label>
@@ -133,56 +126,61 @@ const PlanPage = () => {
                       onChange={(e) => setActaDate(e.target.value)}
                     />
                   </Form.Group>
-                  <Button type="submit" variant="primary">Ingresar Reunión</Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
 
-        <Row className='justify-content-md-center'>
-          <Col md={8}>
-            <Card className='mb-4'>
-              <Card.Header>Temas de la reunión</Card.Header>
-              <Card.Body>
-                {temas.map((tema, index) => (
-                  <InputGroup className="mb-3" key={index}>
-                    <InputGroup.Text>{index + 1}.</InputGroup.Text>
-                    <FormControl 
-                      value={tema}
-                      onChange={(e) => handleTemasChange(e.target.value, index)}
-                    />
-                    <Button variant="outline-danger" onClick={() => removeTema(index)}>
-                      Eliminar
-                    </Button>
-                  </InputGroup>
-                ))}
-                <Button variant="outline-primary" onClick={addTema}>
-                  Añadir Tema
-                </Button>
-                <br />
-                <Form.Label>Documentación subida para esta reunión</Form.Label>
-                <br />
-                <Button variant="outline-primary" onClick={() => document.getElementById("uploads").click()}>
-                  Agregar Archivo
-                </Button>
-                <Form.Control
-                  type="file"
-                  id="uploads"
-                  onChange={handleFileUpload}
-                  hidden
-                  multiple
-                />
-                {documentos.map((doc, index) => (
-                  <div key={index} onClick={() => handleOpenFile(doc)}>
-                    <span className="icon me-2">📄</span>
-                    {truncateText(doc)}
-                  </div>
-                ))}
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+          <Row className='justify-content-md-center'>
+            <Col md={8}>
+              <Card className='mb-4'>
+                <Card.Header>Temas de la reunión</Card.Header>
+                <Card.Body>
+                  {temas.map((tema, index) => (
+                    <InputGroup className="mb-3" key={index}>
+                      <InputGroup.Text>{index + 1}.</InputGroup.Text>
+                      <FormControl 
+                        value={tema}
+                        onChange={(e) => handleTemasChange(e.target.value, index)}
+                      />
+                      <Button variant="outline-danger" onClick={() => removeTema(index)}>
+                        Eliminar
+                      </Button>
+                    </InputGroup>
+                  ))}
+                  <Button variant="outline-primary" onClick={addTema}>
+                    Añadir Tema
+                  </Button>
+                  <br />
+                  <Form.Label>Documentación subida para esta reunión</Form.Label>
+                  <br />
+                  {documentos.map((doc, index) => (
+                    <div key={index} >
+                      <span className="icon me-2">📄</span>
+                      {truncateText(doc)}
+                    </div>
+                  ))}
+                  <Button variant="outline-primary" onClick={() => document.getElementById("uploads").click()}>
+                    Agregar Archivo
+                  </Button>
+                  <Form.Control
+                    type="file"
+                    id="uploads"
+                    onChange={handleFileUpload}
+                    hidden
+                    multiple
+                  />
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+
+          <Row className='justify-content-md-center'>
+            <Col md={8}>
+              <Button type="submit" variant="primary">Ingresar Reunión</Button>
+            </Col>
+          </Row>
+        </Form>
 
         <Modal show={openExit} onHide={handleCloseExit}>
           <Modal.Header closeButton>
